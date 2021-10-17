@@ -8,6 +8,18 @@ Plugin na bany Bukkit 1.13+, napisany dla [DreamCode](https://discord.gg/G8aFUSy
 - Każda wiadomosc oraz ustawienia można zmienic w config.yml
 - Parametry do wiadomosci sa opisane w config.yml (przyklady)
 - Pomoc znajdziesz na naszym discord.
+**Komendy** (powod jest opcjonalny)
+- /banreload - Przeladowywuje config.
+- /checkban - Wyświetla status banów.
+- /checkwarn - Wyświetla liste ostrzezen.
+- /ban [nick] [powod] - Banuje gracza.
+- /tempban [nick] [czas(np. 1m)] [powod] - Banuje tymczasowo gracza.
+- /kick [nick] [powod] - Wyrzuca gracza.
+- /mute [nick] [powod] - Wycisza gracza.
+- /tempmute [nick] [czas(np. 1m)] [powod] - Wycisza tymczasowo gracza.
+- /warn [nick] [powod] - Ostrzega gracza.
+- /unban [nick] [powod] - Usuwa nadanego bana graczowi.
+- /unmute [nick] [powod] - usuwa nadane wyciszenie graczowi.
 
 ### Uzycie przykładowe event'ow:
 ```java
