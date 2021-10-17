@@ -1,7 +1,7 @@
 # dcBans🛡️
 Plugin na bany Bukkit 1.13+, napisany dla [DreamCode](https://discord.gg/G8aFUSyfFh), z full-config.
 
-## Download: [1.1-SNAPSHOT](https://github.com/Ravis96/dcBans/releases)
+## Download: [1.0](https://github.com/Ravis96/dcBans/releases)
 
 ### Informacje:
 - Permisje wg. schematu: (rpl.(komenda))
