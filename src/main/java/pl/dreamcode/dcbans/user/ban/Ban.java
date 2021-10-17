@@ -11,23 +11,23 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Getter
-@Setter
 @AllArgsConstructor
 public class Ban implements ConfigurationSerializable {
-    private BanType banType;
-    private String admin;
+    private final BanType banType;
+    private final String admin;
+    @Setter
     private String reason;
-    private String date;
-    private long start;
-    private int end;
+    private final String date;
+    private final long start;
+    private final int end;
 
     public Ban(Map<String, Object> sb) {
-        setBanType(BanType.valueOf((String) sb.get("banType")));
-        setAdmin((String) sb.get("admin"));
-        setReason((String) sb.get("reason"));
-        setDate((String) sb.get("date"));
-        setStart(Long.parseLong((String) sb.get("start")));
-        setEnd((Integer) sb.get("end"));
+        this.banType = BanType.valueOf((String) sb.get("banType"));
+        this.admin = (String) sb.get("admin");
+        this.reason = (String) sb.get("reason");
+        this.date = (String) sb.get("date");
+        this.start = Long.parseLong((String) sb.get("start"));
+        this.end = (Integer) sb.get("end");
     }
 
     @Override
