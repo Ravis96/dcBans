@@ -1,2 +1,1 @@
-# dcBans
-🛡️Plugin na bany, wraz z całym config'iem.
+# dcBans🛡️ - Plugin na bany.
