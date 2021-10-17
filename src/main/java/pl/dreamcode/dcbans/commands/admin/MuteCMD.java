@@ -6,6 +6,8 @@ import org.bukkit.entity.Player;
 import pl.dreamcode.dcbans.Main;
 import pl.dreamcode.dcbans.commands.CCommand;
 import pl.dreamcode.dcbans.config.Config;
+import pl.dreamcode.dcbans.events.PlayerBanEvent;
+import pl.dreamcode.dcbans.events.PlayerMuteEvent;
 import pl.dreamcode.dcbans.user.User;
 import pl.dreamcode.dcbans.user.ban.Ban;
 import pl.dreamcode.dcbans.user.ban.BanType;
@@ -52,23 +54,26 @@ public class MuteCMD extends CCommand {
                 return;
             }
         }
-        if(config.isBcBans()) {
-            ChatUtil.broadcastMessage(ChatUtil.fixColors(config.getBcMute())
-                    .replace("%NICK%", u.getName()).replace("%ADMIN%", sender.getName()));
-        }
-        if(args.length == 1) {
-            Ban ban = new Ban(BanType.MUTE, sender.getName(), config.getNoReason(), DateUtil.getDate(config.getDateFormat()), 0, 0);
-            BanUtils.addBan(u, ban);
-        } else {
+        Ban ban = new Ban(BanType.MUTE, sender.getName(), config.getNoReason(), DateUtil.getDate(config.getDateFormat()), 0, 0);
+        if(args.length != 1) {
             StringBuilder msg = new StringBuilder();
             for (int ia = 1; ia < args.length; ia++)
                 msg.append(args[ia]).append(" ");
-            if(config.isBcBans()) {
-                ChatUtil.broadcastMessage(ChatUtil.fixColors(config.getBcReason())
-                        .replace("%REASON%", ChatUtil.fixColors(msg.toString())));
-            }
-            Ban ban = new Ban(BanType.MUTE, sender.getName(), ChatUtil.fixColors(msg.toString()), DateUtil.getDate(config.getDateFormat()), 0, 0);
-            BanUtils.addBan(u, ban);
+            String reason = msg.toString();
+            ban.setReason(reason);
+        }
+        PlayerMuteEvent event = new PlayerMuteEvent(u, ban);
+        Bukkit.getPluginManager().callEvent(event);
+        if (event.isCancelled()) {
+            sender.sendMessage(ChatUtil.fixColors(event.getReason()));
+            return;
+        }
+        BanUtils.addBan(u, ban);
+        if(config.isBcBans()) {
+            ChatUtil.broadcastMessage(ChatUtil.fixColors(config.getBcMute())
+                    .replace("%NICK%", u.getName()).replace("%ADMIN%", sender.getName()));
+            ChatUtil.broadcastMessage(ChatUtil.fixColors(config.getBcReason())
+                    .replace("%REASON%", ChatUtil.fixColors(ban.getReason())));
         }
         if(config.isBcAdmin()) sender.sendMessage(ChatUtil.fixColors(config.getMute()));
     }

@@ -1,10 +1,13 @@
 package pl.dreamcode.dcbans.commands.admin;
 
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import pl.dreamcode.dcbans.Main;
 import pl.dreamcode.dcbans.commands.CCommand;
 import pl.dreamcode.dcbans.config.Config;
+import pl.dreamcode.dcbans.events.PlayerTempbanEvent;
+import pl.dreamcode.dcbans.events.PlayerTempmuteEvent;
 import pl.dreamcode.dcbans.user.User;
 import pl.dreamcode.dcbans.user.ban.Ban;
 import pl.dreamcode.dcbans.user.ban.BanType;
@@ -73,24 +76,27 @@ public class TempmuteCMD extends CCommand {
             if(s.equalsIgnoreCase("s")) {
                 sec = i;
             }
+            Ban ban = new Ban(BanType.TEMP_MUTE, sender.getName(), config.getNoReason(), DateUtil.getDate(config.getDateFormat()), System.currentTimeMillis(), sec);
+            if(args.length != 2) {
+                StringBuilder msg = new StringBuilder();
+                for (int ia = 2; ia < args.length; ia++)
+                    msg.append(args[ia]).append(" ");
+                String reason = msg.toString();
+                ban.setReason(reason);
+            }
+            PlayerTempmuteEvent event = new PlayerTempmuteEvent(u, ban);
+            Bukkit.getPluginManager().callEvent(event);
+            if (event.isCancelled()) {
+                sender.sendMessage(ChatUtil.fixColors(event.getReason()));
+                return;
+            }
+            BanUtils.addBan(u, ban);
             if(config.isBcBans()) {
                 ChatUtil.broadcastMessage(ChatUtil.fixColors(config.getBcTempmute())
                         .replace("%NICK%", u.getName()).replace("%ADMIN%", sender.getName())
                         .replace("%TIME%", TimeUtil.convertLong(sec)));
-            }
-            if(args.length == 2) {
-                Ban ban = new Ban(BanType.TEMP_MUTE, sender.getName(), config.getNoReason(), DateUtil.getDate(config.getDateFormat()), System.currentTimeMillis(), sec);
-                BanUtils.addBan(u, ban);
-            } else {
-                StringBuilder msg = new StringBuilder();
-                for (int ia = 2; ia < args.length; ia++)
-                    msg.append(args[ia]).append(" ");
-                if(config.isBcBans()) {
-                    ChatUtil.broadcastMessage(ChatUtil.fixColors(config.getBcReason())
-                            .replace("%REASON%", ChatUtil.fixColors(msg.toString())));
-                }
-                Ban ban = new Ban(BanType.TEMP_MUTE, sender.getName(), ChatUtil.fixColors(msg.toString()), DateUtil.getDate(config.getDateFormat()), System.currentTimeMillis(), sec);
-                BanUtils.addBan(u, ban);
+                ChatUtil.broadcastMessage(ChatUtil.fixColors(config.getBcReason())
+                        .replace("%REASON%", ChatUtil.fixColors(ban.getReason())));
             }
             if(config.isBcAdmin()) sender.sendMessage(ChatUtil.fixColors(config.getMute()));
         } catch (NumberFormatException e) {
