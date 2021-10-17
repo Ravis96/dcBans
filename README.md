@@ -23,7 +23,7 @@ Plugin na bany Spigot 1.13+, napisany dla [DreamCode](https://discord.gg/G8aFUSy
 
 ### Uzycie przykładowe event'ow:
 ```java
-public class onPlayerBan implements Listener {
+public class PlayerBanListener implements Listener {
 
     @EventHandler
     public void onBan(PlayerBanEvent e) {
