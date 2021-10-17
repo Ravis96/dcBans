@@ -1,0 +1,5 @@
+name: dcBans
+version: '${project.version}'
+main: pl.dreamcode.dcbans.Main
+api-version: 1.13
+authors: [ Ravis96 ]
