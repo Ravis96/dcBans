@@ -39,7 +39,7 @@ if(BanUtils.isMute(p)) {
 }
 # Jezeli chcesz uzyc perm-bana, start i end ustaw na 0.
 # W przypadku temp-ban, start ustaw na System.currentTimeMillis(), a end na sekundy bana. (60s - 1min)
-# Formatowanie daty znajdziesz w DateUtil.getDate(twoj format), przyklad masz w config'u.
+# Formatowanie daty znajdziesz w DateUtil.getDate(twoj format), przyklad masz w configu.
 BanUtils.addBanAndKick(p, new Ban(BanType.BAN, sender.getName(), "Bez powodu", DateUtil.getDate(config.getDateFormat()), 0, 0);
 ```
 
