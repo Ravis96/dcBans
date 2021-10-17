@@ -29,6 +29,19 @@ public class onPlayerBan implements Listener {
     }
 }
 ```
+### Wywolanie bana z innego miejsca niż komenda:
+```java
+if(BanUtils.isBan(p)) {
+    return "Gracz posiada bana.";
+}
+if(BanUtils.isMute(p)) {
+    return "Gracz jest wyciszony.";
+}
+# Jezeli chcesz uzyc perm-bana, start i end ustaw na 0.
+# W przypadku temp-ban, start ustaw na System.currentTimeMillis(), a end na sekundy bana. (60s - 1min)
+# Formatowanie daty znajdziesz w DateUtil.getDate(twoj format), przyklad masz w config'u.
+BanUtils.addBanAndKick(p, new Ban(BanType.BAN, sender.getName(), "Bez powodu", DateUtil.getDate(config.getDateFormat()), 0, 0);
+```
 
 ## Plugin nie jest doskonały, lecz może komuś sie przyda. 🤭
 
