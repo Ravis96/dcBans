@@ -30,7 +30,7 @@ public class onPlayerBan implements Listener {
 }
 ```
 
-## Plugin może nie doskonały, lecz może komuś sie przyda. 🤭
+## Plugin nie jest doskonały, lecz może komuś sie przyda. 🤭
 
 ps. Jest lekki lag, ze wzgledu na lagującą funkcje kickPlayer.
 Można to naprawić, poprawiając tą funkcje w silniku serwera.
