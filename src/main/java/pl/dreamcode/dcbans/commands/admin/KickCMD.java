@@ -61,7 +61,7 @@ public class KickCMD extends CCommand {
             String reason = msg.toString();
             ban.setReason(reason);
         }
-        PlayerKickEvent event = new PlayerKickEvent(u, ban);
+        PlayerKickEvent event = new PlayerKickEvent(sender, u, ban.getReason());
         Bukkit.getPluginManager().callEvent(event);
         if (event.isCancelled()) {
             sender.sendMessage(ChatUtil.fixColors(event.getReason()));

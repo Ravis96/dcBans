@@ -62,7 +62,7 @@ public class MuteCMD extends CCommand {
             String reason = msg.toString();
             ban.setReason(reason);
         }
-        PlayerMuteEvent event = new PlayerMuteEvent(u, ban);
+        PlayerMuteEvent event = new PlayerMuteEvent(sender, u, ban.getReason());
         Bukkit.getPluginManager().callEvent(event);
         if (event.isCancelled()) {
             sender.sendMessage(ChatUtil.fixColors(event.getReason()));

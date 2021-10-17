@@ -2,32 +2,39 @@ package pl.dreamcode.dcbans.events;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import pl.dreamcode.dcbans.user.User;
 import pl.dreamcode.dcbans.user.ban.Ban;
+import pl.dreamcode.dcbans.user.ban.BanUtils;
 import pl.dreamcode.dcbans.utils.ChatUtil;
 
 @Getter
 @RequiredArgsConstructor
 public class PlayerBanEvent extends Event implements Cancellable {
     private final HandlerList handlerList = new HandlerList();
+    private final CommandSender admin;
     private final User user;
-    private final Ban ban;
-    private String reason = defaultReason();
+    private final String reason;
+    private String cancelReason = defaultMessageCancelled();
     private boolean cancelled;
 
     public User getUser() {
         return this.user;
     }
 
-    public Ban getBan() {
-        return this.ban;
+    public CommandSender getAdmin() {
+        return this.admin;
+    }
+
+    public String getReason() {
+        return this.reason;
     }
 
     public void setCancelledReason(String text) {
-        this.reason = text;
+        this.cancelReason = text;
     }
 
     @Override
@@ -45,7 +52,7 @@ public class PlayerBanEvent extends Event implements Cancellable {
         this.cancelled = cancelled;
     }
 
-    private String defaultReason() {
+    private String defaultMessageCancelled() {
         return "&cEvent zostal anulowany!";
     }
 }

@@ -56,7 +56,7 @@ public class WarnCMD extends CCommand {
             String reason = msg.toString();
             ban.setReason(reason);
         }
-        PlayerWarnEvent event = new PlayerWarnEvent(u, ban);
+        PlayerWarnEvent event = new PlayerWarnEvent(sender, u, ban.getReason());
         Bukkit.getPluginManager().callEvent(event);
         if (event.isCancelled()) {
             sender.sendMessage(ChatUtil.fixColors(event.getReason()));

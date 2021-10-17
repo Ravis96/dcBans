@@ -87,6 +87,10 @@ public final class BanUtils {
         return 0;
     }
 
+    public static long getTimeBan(long start, int end) {
+        return (start / 1000) + end - (System.currentTimeMillis() / 1000);
+    }
+
     public static void addWarn(Player p, Ban ban) {
         User u = Main.getPlugin().getUserManager().get(p);
         if(u != null) {

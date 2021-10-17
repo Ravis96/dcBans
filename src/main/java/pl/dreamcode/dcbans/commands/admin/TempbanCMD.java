@@ -84,7 +84,7 @@ public class TempbanCMD extends CCommand {
                 String reason = msg.toString();
                 ban.setReason(reason);
             }
-            PlayerTempbanEvent event = new PlayerTempbanEvent(u, ban);
+            PlayerTempbanEvent event = new PlayerTempbanEvent(sender, u, ban.getReason(), ban.getStart(), ban.getEnd());
             Bukkit.getPluginManager().callEvent(event);
             if (event.isCancelled()) {
                 sender.sendMessage(ChatUtil.fixColors(event.getReason()));
