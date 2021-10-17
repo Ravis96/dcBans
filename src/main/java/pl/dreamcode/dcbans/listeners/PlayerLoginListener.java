@@ -13,7 +13,7 @@ import pl.dreamcode.dcbans.user.ban.BanUtils;
 import pl.dreamcode.dcbans.utils.ChatUtil;
 import pl.dreamcode.dcbans.utils.TimeUtil;
 
-public class onPlayerLogin implements Listener {
+public class PlayerLoginListener implements Listener {
 
     @EventHandler
     public void onLogin(PlayerLoginEvent e) {

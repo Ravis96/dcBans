@@ -7,8 +7,8 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import pl.dreamcode.dcbans.commands.CommandMap;
 import pl.dreamcode.dcbans.config.ConfigManager;
-import pl.dreamcode.dcbans.listeners.onPlayerChat;
-import pl.dreamcode.dcbans.listeners.onPlayerLogin;
+import pl.dreamcode.dcbans.listeners.AsyncPlayerChatListener;
+import pl.dreamcode.dcbans.listeners.PlayerLoginListener;
 import pl.dreamcode.dcbans.user.User;
 import pl.dreamcode.dcbans.user.UserManager;
 import pl.dreamcode.dcbans.user.ban.Ban;
@@ -54,7 +54,7 @@ public final class Main extends JavaPlugin {
 
     private void registerListeners() {
         PluginManager pm = getServer().getPluginManager();
-        pm.registerEvents(new onPlayerLogin(), this);
-        pm.registerEvents(new onPlayerChat(), this);
+        pm.registerEvents(new PlayerLoginListener(), this);
+        pm.registerEvents(new AsyncPlayerChatListener(), this);
     }
 }

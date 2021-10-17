@@ -13,10 +13,10 @@ import pl.dreamcode.dcbans.user.ban.BanUtils;
 import pl.dreamcode.dcbans.utils.ChatUtil;
 import pl.dreamcode.dcbans.utils.TimeUtil;
 
-public class onPlayerChat implements Listener {
+public class AsyncPlayerChatListener implements Listener {
 
     @EventHandler
-    public void onChat(AsyncPlayerChatEvent e) {
+    public void onAsyncChat(AsyncPlayerChatEvent e) {
         Player p = e.getPlayer();
         Main plugin = Main.getPlugin();
         Config cfg = plugin.getConfigManager().getConfig();
