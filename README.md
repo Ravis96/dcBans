@@ -10,8 +10,8 @@ Plugin na bany Spigot 1.13+, napisany dla [DreamCode](https://discord.gg/G8aFUSy
 - Pomoc znajdziesz na naszym discord.
 ### Komendy: (powód jest opcjonalny)
 - /banreload - Przeladowywuje config.
-- /checkban - Wyświetla status banów.
-- /checkwarn - Wyświetla liste ostrzezen.
+- /checkban [nick] - Wyświetla status banów.
+- /checkwarn [nick] - Wyświetla liste ostrzezen.
 - /ban [nick] [powod] - Banuje gracza.
 - /tempban [nick] [czas(np. 1m)] [powod] - Banuje tymczasowo gracza.
 - /kick [nick] [powod] - Wyrzuca gracza.
