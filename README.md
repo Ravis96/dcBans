@@ -3,7 +3,7 @@ Plugin na bany Bukkit 1.13+, napisany dla [DreamCode](https://discord.gg/G8aFUSy
 
 ## Download: [1.1-SNAPSHOT](https://github.com/Ravis96/dcBans/releases)
 
-# Uzycie przykładowe event'ow:
+### Uzycie przykładowe event'ow:
 ```java
 public class onPlayerBan implements Listener {
 
