@@ -19,6 +19,8 @@ public final class BanUtils {
                 if(ban.getBanType().equals(BanType.BAN)) {
                     return true;
                 }
+            }
+            for(Ban ban : u.getBans()) {
                 if(ban.getBanType().equals(BanType.TEMP_BAN)) {
                     long secondsLeft = (ban.getStart() / 1000) + ban.getEnd() - (System.currentTimeMillis() / 1000);
                     return secondsLeft > 0;
@@ -33,6 +35,8 @@ public final class BanUtils {
             if(ban.getBanType().equals(BanType.BAN)) {
                 return true;
             }
+        }
+        for(Ban ban : u.getBans()) {
             if(ban.getBanType().equals(BanType.TEMP_BAN)) {
                 long secondsLeft = (ban.getStart() / 1000) + ban.getEnd() - (System.currentTimeMillis() / 1000);
                 return secondsLeft > 0;
@@ -45,9 +49,11 @@ public final class BanUtils {
         User u = Main.getPlugin().getUserManager().get(p);
         if(u != null) {
             for(Ban ban : u.getBans()) {
-                if(ban.getBanType().equals(BanType.MUTE)) {
+                if (ban.getBanType().equals(BanType.MUTE)) {
                     return true;
                 }
+            }
+            for(Ban ban : u.getBans()) {
                 if(ban.getBanType().equals(BanType.TEMP_MUTE)) {
                     long secondsLeft = (ban.getStart() / 1000) + ban.getEnd() - (System.currentTimeMillis() / 1000);
                     return secondsLeft > 0;
@@ -59,9 +65,11 @@ public final class BanUtils {
 
     public static boolean isMute(User u) {
         for(Ban ban : u.getBans()) {
-            if(ban.getBanType().equals(BanType.MUTE)) {
+            if (ban.getBanType().equals(BanType.MUTE)) {
                 return true;
             }
+        }
+        for(Ban ban : u.getBans()) {
             if(ban.getBanType().equals(BanType.TEMP_MUTE)) {
                 long secondsLeft = (ban.getStart() / 1000) + ban.getEnd() - (System.currentTimeMillis() / 1000);
                 return secondsLeft > 0;
@@ -113,6 +121,7 @@ public final class BanUtils {
                         .replace("%ADMIN%", ban.getAdmin())
                         .replace("%DATE%", ban.getDate())
                         .replace("%REASON%", ban.getReason()));
+                return;
             }
             if(ban.getBanType().equals(BanType.TEMP_BAN)) {
                 p.kickPlayer(ChatUtil.fixColors(cfg.getKtempban())
@@ -120,6 +129,7 @@ public final class BanUtils {
                         .replace("%DATE%", ban.getDate())
                         .replace("%REASON%", ban.getReason())
                         .replace("%BAN_TIME%", TimeUtil.convertLong(BanUtils.getTimeBan(u, BanType.TEMP_BAN))));
+                return;
             }
             if(ban.getBanType().equals(BanType.KICK)) {
                 p.kickPlayer(ChatUtil.fixColors(cfg.getKkick())
@@ -127,6 +137,33 @@ public final class BanUtils {
                         .replace("%DATE%", ban.getDate())
                         .replace("%REASON%", ban.getReason()));
             }
+        }
+    }
+
+    public static void addBanAndKick(Player p, User u, Ban ban) {
+        removeBan(u, ban.getBanType());
+        u.getBans().add(ban);
+        Config cfg = Main.getPlugin().getConfigManager().getConfig();
+        if(ban.getBanType().equals(BanType.BAN)) {
+            p.kickPlayer(ChatUtil.fixColors(cfg.getKban())
+                    .replace("%ADMIN%", ban.getAdmin())
+                    .replace("%DATE%", ban.getDate())
+                    .replace("%REASON%", ban.getReason()));
+            return;
+        }
+        if(ban.getBanType().equals(BanType.TEMP_BAN)) {
+            p.kickPlayer(ChatUtil.fixColors(cfg.getKtempban())
+                    .replace("%ADMIN%", ban.getAdmin())
+                    .replace("%DATE%", ban.getDate())
+                    .replace("%REASON%", ban.getReason())
+                    .replace("%BAN_TIME%", TimeUtil.convertLong(BanUtils.getTimeBan(u, BanType.TEMP_BAN))));
+            return;
+        }
+        if(ban.getBanType().equals(BanType.KICK)) {
+            p.kickPlayer(ChatUtil.fixColors(cfg.getKkick())
+                    .replace("%ADMIN%", ban.getAdmin())
+                    .replace("%DATE%", ban.getDate())
+                    .replace("%REASON%", ban.getReason()));
         }
     }
 
