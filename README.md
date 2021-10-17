@@ -64,5 +64,4 @@ BanUtils.addBanAndKick(p, new Ban(BanType.BAN, sender.getName(), "Bez powodu", D
 ## Plugin nie jest doskonały, lecz może komuś sie przyda. 🤭
 
 ps. Jest lekki lag, ze wzgledu na lagującą funkcje kickPlayer.
-
-Można to naprawić, poprawiając tą funkcje w silniku serwera.
+Poprawić to można w silnik'u.
