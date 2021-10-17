@@ -23,7 +23,7 @@ public class onPlayerBan implements Listener {
                 e.setCancelledReason(ChatUtil.fixColors("&cAby to zrobic, musisz miec pelne zycie!"));
                 return;
             }
-            if (p.isSneaking()) {
+            if (!p.isSneaking()) {
                 e.setCancelled(true);
                 e.setCancelledReason(ChatUtil.fixColors("&cAby to zrobic, musisz kucac!"));
                 return;
