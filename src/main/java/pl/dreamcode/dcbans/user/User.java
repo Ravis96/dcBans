@@ -10,19 +10,18 @@ import pl.dreamcode.dcbans.user.ban.Ban;
 import java.util.*;
 
 @Getter
-@Setter
 @AllArgsConstructor
 public class User implements ConfigurationSerializable {
-    private String name;
-    private List<Ban> bans;
+    private final String name;
+    private final List<Ban> bans;
 
     public User(Map<String, Object> su) {
-        setName((String) su.get("name"));
+        this.name = (String) su.get("name");
         ArrayList<Map<String, Object>> mapBans = (ArrayList<Map<String, Object>>) su.get("bans");
         ArrayList<Ban> dsBans = new ArrayList<>();
         for(Map<String, Object> sBans : mapBans)
             dsBans.add(new Ban(sBans));
-        setBans(dsBans);
+        this.bans = dsBans;
     }
 
     public static User defaultUser(Player p) {
