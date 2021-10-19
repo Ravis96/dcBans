@@ -1,7 +1,7 @@
 # dcBans🛡️
-Plugin na bany Bukkit 1.13+, napisany dla [DreamCode](https://discord.gg/G8aFUSyfFh), z full-config.
+Plugin na bany Spigot 1.13+, napisany dla [DreamCode](https://discord.gg/G8aFUSyfFh), z full-config.
 
-## Download: [1.1-SNAPSHOT](https://github.com/Ravis96/dcBans/releases)
+## Download: [1.0](https://github.com/Ravis96/dcBans/releases)
 
 ### Informacje:
 - Permisje wg. schematu: (rpl.(komenda))
@@ -10,8 +10,8 @@ Plugin na bany Bukkit 1.13+, napisany dla [DreamCode](https://discord.gg/G8aFUSy
 - Pomoc znajdziesz na naszym discord.
 ### Komendy: (powód jest opcjonalny)
 - /banreload - Przeladowywuje config.
-- /checkban - Wyświetla status banów.
-- /checkwarn - Wyświetla liste ostrzezen.
+- /checkban [nick] - Wyświetla status banów.
+- /checkwarn [nick] - Wyświetla liste ostrzezen.
 - /ban [nick] [powod] - Banuje gracza.
 - /tempban [nick] [czas(np. 1m)] [powod] - Banuje tymczasowo gracza.
 - /kick [nick] [powod] - Wyrzuca gracza.
@@ -23,7 +23,7 @@ Plugin na bany Bukkit 1.13+, napisany dla [DreamCode](https://discord.gg/G8aFUSy
 
 ### Uzycie przykładowe event'ow:
 ```java
-public class onPlayerBan implements Listener {
+public class PlayerBanListener implements Listener {
 
     @EventHandler
     public void onBan(PlayerBanEvent e) {
