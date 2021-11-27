@@ -1,5 +1,6 @@
 # dcBans🛡️
 Plugin na bany Spigot 1.13+, napisany dla [DreamCode](https://discord.gg/G8aFUSyfFh), z full-config.
+
 OLD_PLG - Need re_write. :(
 ^Metody wykorzystane tutaj są nie do końca dobrze zrobione, ale działa. :P
 
